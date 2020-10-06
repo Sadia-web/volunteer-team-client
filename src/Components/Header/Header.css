@@ -1,0 +1,12 @@
+.navbar-brand img {
+    width: 250px;
+}
+
+.header {
+    margin: 0px 7%;
+}
+
+.logout-btn{
+    background-color: white;
+    border: none;
+}
