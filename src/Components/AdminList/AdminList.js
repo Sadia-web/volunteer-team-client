@@ -1,5 +1,4 @@
 import React from 'react';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from 'react-router-dom';
 
 
@@ -10,7 +9,7 @@ const AdminList = (props) => {
     const {_id, name, email, date, eventName} = props.event;
 
     const handleDelete = () => {
-        fetch(`/delete/${_id}`, { method: 'DELETE' })
+        fetch(`https://young-beyond-69689.herokuapp.com/delete/${_id}`, { method: 'DELETE' })
         .then(res => res.json())
         .then(result => {
             history.go(0);
@@ -23,7 +22,7 @@ const AdminList = (props) => {
             <td>{email}</td>
             <td>{date}</td>
             <td>{eventName}</td>
-            <td><button className="logout-btn" onClick={handleDelete}><DeleteIcon style={{color: 'red'}}/></button></td>
+            <td><button className="logout-btn" onClick={handleDelete}></button></td>
         </tr>
     );
 };

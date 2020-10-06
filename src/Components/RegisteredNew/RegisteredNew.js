@@ -2,14 +2,14 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 const RegisteredNew = (props) => {
 
-    const {eventName, eventImg, eventDescription, email, _id} = props.event;
+    const {eventName, eventImg, email, _id} = props.events;
 
     const signedInEmail = JSON.parse(localStorage.getItem("email")); 
 
     const history = useHistory();
 
     const handleDelete = () => {
-        fetch(`/delete/${_id}`, { method: 'DELETE' })
+        fetch(`https://young-beyond-69689.herokuapp.com/delete/${_id}`, { method: 'DELETE' })
         .then(res => res.json())
         .then(result => {
             history.go(0);
@@ -24,7 +24,6 @@ const RegisteredNew = (props) => {
                     <img className="card-img-top" src={eventImg} alt="Card image cap"></img>
                     <div className="card-body">
                         <h5 className="card-title">{eventName}</h5>
-                        <p className="card-text">{eventDescription}</p>
                     </div>
                     <div className="card-footer">
                         <button className="btn btn-danger" onClick={handleDelete}>Cancel</button>

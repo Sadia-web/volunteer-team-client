@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import RegisteredSingle from '../RegisteredSingle/RegisteredSingle';
+import RegisteredNew from '../RegisteredNew/RegisteredNew';
 
 const RegisteredEvent = () => {
 
     const [registeredEvent, setRegisteredEvent] = useState([]);
 
     useEffect( () => {
-        fetch('/registeredEvent')
+        fetch('https://young-beyond-69689.herokuapp.com/registeredEvent')
         .then(res => res.json())
         .then(data => setRegisteredEvent(data))
     }, [])
@@ -14,7 +14,7 @@ const RegisteredEvent = () => {
     return (
         <div className="custom-container">
             {
-                registeredEvent.map(event => <RegisteredSingle event={event} key={event.id}/>)
+                registeredEvent.map(events => <RegisteredNew event={events} key={events.id}/>)
             }
         </div>
     );

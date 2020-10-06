@@ -1,6 +1,6 @@
   
 import React, { useEffect, useState } from 'react';
-// import eventData from '../fakeData/eventData';
+
 import Event from '../Event/Event';
 import './Home.css';
 
@@ -9,7 +9,7 @@ const Home = () => {
     const [eventData, setEventData] = useState([])
 
     useEffect(() => {
-        fetch('/event')
+        fetch('https://young-beyond-69689.herokuapp.com/events')
         .then(res => res.json())
         .then(data => setEventData(data))
     }, [])  

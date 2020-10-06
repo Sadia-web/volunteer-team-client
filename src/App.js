@@ -3,15 +3,15 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
-import NoMatch from '/Components/NoMatch/NoMatch';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import AdminEvent from './Components/AdminEvent/AdminEvent';
 import RegisterVolunteer from './Components/RegisterVolunteer/RegisterVolunteer';
-import RegisteredEvent from '/Components/RegisteredEvent/RegisteredEvent';
+import NoMatch from './Components/NoMatch/NoMatch';
+import RegisteredEvent from './Components/RegisteredEvent/RegisteredEvent';
+import Header from './Components/Header/Header';
 
 export const UserContext = createContext()
 
@@ -22,11 +22,17 @@ function App() {
           <Route exact path='/'>
             <Home/>
           </Route>
+          <Route path='/adminEvent'>
+            <AdminEvent></AdminEvent>
+          </Route>
+          <Route path="/home">
+            <Home></Home>
+          </Route>
+          <Route path="/header">
+            <Header></Header>
+          </Route>
           <Route path='/login'>
             <Login/>
-          </Route>
-          <Route path='*'>
-            <NoMatch/>
           </Route>
           <Route path='/adminEvent'>
             <AdminEvent></AdminEvent>
@@ -34,9 +40,14 @@ function App() {
           <PrivateRoute path='/registerVolunteer/:id'>
             <RegisterVolunteer></RegisterVolunteer>
           </PrivateRoute>
-          <PrivateRoute path='/registeredEvent'>
-            <RegisteredEvent></RegisteredEvent>
+            <PrivateRoute path='/registeredEvent'>
           </PrivateRoute>
+          <Route path='/registeredEvent'>
+                <RegisteredEvent></RegisteredEvent>
+          </Route>         
+          <Route path="*">
+            <NoMatch></NoMatch>
+          </Route>
       </Switch>
     </Router>
   );

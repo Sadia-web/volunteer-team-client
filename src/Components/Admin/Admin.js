@@ -1,40 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import AdminEventList from '../AdminEventList/AdminEventList';
 
 const Admin = () => {
 
-    const [registeredEvent, setRegisteredEvent] = useState([]);
+    const [newEvent, setNewEvent] = useState({})
 
     const history = useHistory();
 
-    useEffect( () => {
-        fetch('https://volunteer-network18.herokuapp.com/registeredEvent')
+    const handleOnBlur = (e) => {
+        const myEvent = {...newEvent};
+        myEvent[e.target.name] = e.target.value;
+        setNewEvent(myEvent);
+    }
+
+    const handleAddEvent = (e) => {
+        
+        fetch('https://young-beyond-69689.herokuapp.com/addEvent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newEvent)
+        })
         .then(res => res.json())
-        .then(data => setRegisteredEvent(data))
-    }, [])
+        .then(data => {
+            history.replace('/');
+        })
+
+        e.preventDefault();
+    }
 
     return (
-        <div className="custom-container">
-            <br/>
-            <h3 className="text-center">Volunteer register list</h3><br/>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email Id</th>
-                        <th scope="col">Registration Date</th>
-                        <th scope="col">Event Name</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                
-                {
-                    registeredEvent.map(e => <AdminEventList event={e} key={e._id}/>) 
-                }
-                
-            </table>
-            <button className="btn btn-primary" onClick={() => history.replace('/adminAddEvent')}>Add Event</button>
+        <div>
+            <br/><br/>
+            <form className="container">
+                <div className="form-group">
+                    <label>Event Name</label>
+                    <input name="name" onBlur={handleOnBlur} type="text" class="form-control" placeholder="Event Name"/>
+                </div>
+                <div className="form-group">
+                    <label for="exampleInputPassword1">Event Description</label>
+                    <textarea name="description" onBlur={handleOnBlur} rows="5" type="text" class="form-control" placeholder="Event Description"/>
+                </div>
+                <div className="form-group">
+                    <label for="exampleInputPassword1">Image URL</label>
+                    <input class="form-control" name="img" onBlur={handleOnBlur} type="text" placeholder="Image URL"/>
+                </div>
+                <button onClick={handleAddEvent} class="btn btn-primary">Add this Event</button>
+            </form>
             
         </div>
     );

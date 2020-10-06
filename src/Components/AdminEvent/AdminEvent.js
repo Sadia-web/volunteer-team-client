@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import AdminEventList from '../AdminEventList/AdminEventList';
+import AdminList from '../AdminList/AdminList';
 
 const AdminEvent = () => {
     const [registeredEvent, setRegisteredEvent] = useState([]);
@@ -8,7 +8,7 @@ const AdminEvent = () => {
     const history = useHistory();
 
     useEffect( () => {
-        fetch('/registeredEvent')
+        fetch('https://young-beyond-69689.herokuapp.com/registeredEvent')
         .then(res => res.json())
         .then(data => setRegisteredEvent(data))
     }, [])
@@ -29,11 +29,11 @@ const AdminEvent = () => {
                 </thead>
                 
                 {
-                    registeredEvent.map(e => <AdminEventList event={e} key={e._id}/>) 
+                    registeredEvent.map(e => <AdminList event={e} key={e._id}/>) 
                 }
                 
             </table>
-            <button className="btn btn-primary" onClick={() => history.replace('/adminAddEvent')}>Add Event</button>
+            <button className="btn btn-primary" onClick={() => history.replace('/adminEvent')}>Add Event</button>
             
         </div>
     );

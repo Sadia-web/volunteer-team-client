@@ -5,13 +5,12 @@ const Event = (props) => {
     return (
 
         <div className="card event-block" style={{width: '20rem', display: 'inline-block'}}>
-            <img className="card-img-top" src={props.event.img} alt="Card image cap"></img>
+            <img className="card-img-top" src={props.events.img} alt="Card image cap"/>
             <div className="card-body">
-                <h5 className="card-title">{props.event.name}</h5>
-                <p className="card-text">{props.event.description}</p>
+                <h5 className="card-title">{props.events.name}</h5>
             </div>
             <div className="card-footer">
-                <a href={`/RegisterVolunteer/${props.event._id}`} className="btn btn-primary">Register</a>
+                <a href={`/RegisterVolunteer/${props.events._id}`} className="btn btn-primary">Register</a>
             </div>
         </div>
         

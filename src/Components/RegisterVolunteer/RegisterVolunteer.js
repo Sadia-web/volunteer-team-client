@@ -19,13 +19,12 @@ const RegisterVolunteer = () => {
     const email = JSON.parse(localStorage.getItem("email")); 
 
     useEffect(() => {
-        fetch('/event')
+        fetch('https://young-beyond-69689.herokuapp.com/event')
         .then(res => res.json())
         .then(data => {
             setEventData(data)
             const myEvent = data.find(e => e._id === id);
             setEvent(myEvent);
-            // console.log(myEvent)
         })
     }, []) 
     
